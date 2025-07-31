@@ -14,6 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderSchedule = (talksToRender) => {
         scheduleContainer.innerHTML = ''; // Clear previous content
 
+        if (talksToRender.length === 0) {
+            const noResultsMessage = document.createElement('p');
+            noResultsMessage.textContent = 'No talks found for this category. Please try a different search term.';
+            noResultsMessage.style.textAlign = 'center';
+            noResultsMessage.style.padding = '20px';
+            noResultsMessage.style.color = '#666';
+            scheduleContainer.appendChild(noResultsMessage);
+            return; // Exit the function as there's nothing else to render
+        }
+
         talksToRender.forEach(item => {
             const itemDiv = document.createElement('div');
             const startTime = formatTime(new Date(item.startTime));
